@@ -1,35 +1,32 @@
+<div  style="text-align:center">
+
 # EduOJ Frontend
 
-这个仓库存储EduOJ的前端代码。
+</div>
 
-EduOJ是一个面向教学的在线评测系统，将程序在线评测和编辑管理功能结合到一起，实现高效的班级、作业管理，作业自动检验。
+# 项目简介
 
-> 目前应用于北京工业大学。
+该项目是一个基于[EduOJ](https://github.com/EduOJ/frontend) 的分支项目，为本人的毕设项目。 该项目目的是在原项目基础上添加附加功能和改进。 更多关于项目的开发信息，请参考原项目，恕不赘述。
 
-## 部署
+# 部署
 
-### 下载 & 构建
+1. 准备环境 安装 [node.js](https://nodejs.org) 及 [yarn](https://yarnpkg.com)
+2. 拉去前端
 
-```sh
-sudo apt-get update
-sudo apt-get install -y git
-git clone https://github.com/EduOJ/frontend.git
-cd frontend
-yarn build
-```
+  ```shell
+  git clone https://github.com/LightningFootball/frontend
+  cd frontend
+  ```
 
-### 配置
+3. 修改配置文件
 
-复制`frontend/src/config/config.example.js`，如有需要可修改其中的`title`和`apiUrl`
+  ```shell
+  cp ./src/config/config.example.js ./src/config/config.js
+  nano ./src/config/config.js
+  ```
 
-```
-cp src/config/config.example.js src/config/config.js
-```
+4. 项目启动
 
-### 部署
-
-把`dist`部署到`nginx`根目录，并配置`/api`目录到后端的反向代理
-
-### 文档 
-
-我们的文档还在施工中。
+  ```shell
+  yarn build
+  ```
