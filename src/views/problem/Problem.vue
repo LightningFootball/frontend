@@ -77,6 +77,19 @@
               </a-list-item>
             </a-list>
           </a-card>
+          <a-card class="analysis_card" v-if="!isGuest">
+            <template slot="title">分析</template>
+            <template v-if="analysis.total_submission_count!==0">
+              <h3>总提交次数</h3> {{ analysis.total_submission_count }} <br></br>
+              <h3>首次提交时间</h3> {{ format(analysis.first_submission_time) }} <br></br>
+              <h3>首次通过时间</h3> {{ format(analysis.first_pass_time) }} <br></br>
+              <h3>最后提交时间</h3> {{ format(analysis.last_submission_time) }} <br></br>
+              <h3>总工作时长</h3> {{ formatTimeDuration(analysis.total_work_time) }} <br></br>
+            </template>
+            <template v-else>
+              <h3>暂无提交记录，快去创建第一次提交吧~</h3>
+            </template>
+          </a-card>
         </a-space>
       </a-col>
     </a-row>
@@ -86,6 +99,7 @@
 <script>
 import { getProblem } from '@/api/problem'
 import { getSubmissions } from '@/api/submission'
+import { getSubmissionsBasicAnalysis } from '@/api/analysis'
 import Markdown from '@/components/Editor/Markdown'
 import RunStatus from '@/components/RunStatus'
 import TestCase from '@/components/TestCase'
@@ -133,7 +147,14 @@ export default {
         attachment_file_name: '',
         test_cases: []
       },
-      submissions: []
+      submissions: [],
+      analysis: {
+        total_submission_count: 0,
+        first_submission_time: '',
+        first_pass_time: '',
+        last_submission_time: '',
+        total_work_time: ''
+      }
     }
   },
   mounted () {
@@ -142,6 +163,9 @@ export default {
   methods: {
     format (time) {
       return moment(time).fromNow()
+    },
+    formatTimeDuration (time) {
+      return moment.duration(time, 'seconds').humanize()
     },
     fetch () {
       this.problem_loading = true
@@ -167,6 +191,19 @@ export default {
         }).then(data => {
           this.submission_loading = false
           this.submissions = data.submissions
+        }).catch(err => {
+          this.$error({
+            content: '遇到错误：' + err.message
+          })
+          console.error(err)
+        })
+      }
+      if (!this.isGuest) {
+        getSubmissionsBasicAnalysis({
+          user_id: this.$store.state.user.info.id,
+          problem_id: this.id
+        }).then(data => {
+          this.analysis = data.analysis
         }).catch(err => {
           this.$error({
             content: '遇到错误：' + err.message

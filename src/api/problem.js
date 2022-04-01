@@ -99,6 +99,7 @@ export function deleteTestCase (testCase) {
     method: 'delete'
   })
 }
+
 export function deleteAllTestCase (problemId) {
   return api({
     url: problemApi.TestCase.replace(':pid', problemId).replace(':tid', 'all'),

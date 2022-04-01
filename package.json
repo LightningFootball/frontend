@@ -81,5 +81,6 @@
     "vue-svg-icon-loader": "^2.1.1",
     "vue-template-compiler": "^2.6.12",
     "webpack-theme-color-replacer": "^1.2.17"
-  }
+  },
+  "packageManager": "yarn@3.2.0"
 }
