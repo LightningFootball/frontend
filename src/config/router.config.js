@@ -1,4 +1,4 @@
-import { UserLayout, BasicLayout } from '@/layouts'
+import { BasicLayout, UserLayout } from '@/layouts'
 import { bxAnaalyse } from '@/core/icons'
 
 const RouteView = {
@@ -187,6 +187,12 @@ export const constantRouterMap = [
                 name: 'class.problemSet.submissions',
                 component: () => import('@/views/class/ProblemSetSubmissions'),
                 meta: { title: '查看提交' }
+              },
+              {
+                path: '/analysis/ProblemSetSpecificProblem',
+                name: 'class.problemSet.analysis',
+                component: () => import('@/views/class/ProblemSetAnalysis'),
+                meta: { title: '查看分析' }
               }
             ]
           }

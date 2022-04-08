@@ -11,16 +11,19 @@
             <div class="problem-name">
               {{ problem.name }}
             </div>
-            <div class="toolbar-row">
-              <div class="space"></div>
-              <router-link :to="{name: 'class.problemSet.problem', params: {id, classID: classID, problemID: problem.id}}">
-                <a-button type="link">
+            <div class='toolbar-row'>
+              <div class='space'></div>
+              <router-link
+                :to="{name: 'class.problemSet.problem', params: {id, classID: classID, problemID: problem.id}}">
+                <a-button type='link'>
                   做题
                 </a-button>
               </router-link>
-              <a-button type="link">
-                查看分数（功能开发中）
-              </a-button>
+              <router-link :to="{name: 'class.problemSet.analysis', params: {problemSetID: id,problemID: problem.id}}">
+                <a-button type='link'>
+                  查看分数
+                </a-button>
+              </router-link>
             </div>
           </a-list-item>
         </a-list>
@@ -44,6 +47,7 @@ import Avatar from '@/components/Avatar'
 import { mapGetters } from 'vuex'
 import { getProblemSet } from '@/api/class'
 import moment from 'moment'
+// import { getProblemSetSpecificProblemAnalysis } from '@/api/analysis'
 
 export default {
   methods: {
@@ -57,6 +61,17 @@ export default {
           content: '获取作业详情时发生了错误' + err.message
         })
       })
+      // getProblemSetSpecificProblemAnalysis({
+      //   problem_set_id: this.id,
+      //   problem_id: this.$route.params.problemID
+      // }).then(data => {
+      //   this.ProblemSetSpecificProblemAnalysisResponse = data.ProblemSetSpecificProblemAnalysisResponse
+      // }).catch(err => {
+      //   this.$error({
+      //     content: '遇到错误' + err.message
+      //   })
+      //   console.error(err)
+      // })
     }
   },
   components: {

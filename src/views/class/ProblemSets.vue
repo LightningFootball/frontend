@@ -25,7 +25,6 @@
                   查看题目
                 </a-button>
               </a-tooltip>
-
               <router-link :to="{name: 'class.problemSet.submissions', params: {classID: klass.id, problemSetID: problem_set.id}}" v-if="started(problem_set)">
                 <a-button type="link">
                   查看提交
@@ -39,10 +38,19 @@
                   查看提交
                 </a-button>
               </a-tooltip>
-
-              <a-button type="link">
-                查看分数（功能开发中）
-              </a-button>
+              <!--              <router-link :to="{name: 'class.problemSet.analysis', params: {problemSetID: problem_set.id,problemID: this.$route.params.problem_id}}" v-if="started(problem_set)">-->
+              <!--                <a-button type="link">-->
+              <!--                  查看分数-->
+              <!--                </a-button>-->
+              <!--              </router-link>-->
+              <!--              <a-tooltip v-else>-->
+              <!--                <template slot="title">-->
+              <!--                  分析数据获取错误！-->
+              <!--                </template>-->
+              <!--                <a-button type="link" disabled>-->
+              <!--                  查看分数-->
+              <!--                </a-button>-->
+              <!--              </a-tooltip>-->
             </div>
           </a-list-item>
         </a-list>

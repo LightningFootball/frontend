@@ -77,9 +77,15 @@
               </a-list-item>
             </a-list>
           </a-card>
-          <a-card class="analysis_card" v-if="!isGuest">
-            <template slot="title">分析</template>
-            <template v-if="analysis.total_submission_count!==0">
+          <a-card class='analysis_card' v-if='!isGuest'>
+            <template slot='title'>分析</template>
+            <template v-if='analysis.highest_score===100'>
+              <h3 style='text-align: center'> 恭喜你，该题目您已成功通过至少一次啦！</h3>
+            </template>
+            <template v-else>
+              <h3 style='text-align: center'> 该题目您还未通过，请继续努力！</h3>
+            </template>
+            <template v-if='analysis.total_submission_count!==0'>
               <h3>总提交次数</h3> {{ analysis.total_submission_count }} <br></br>
               <h3>首次提交时间</h3> {{ format(analysis.first_submission_time) }} <br></br>
               <h3>首次通过时间</h3> {{ format(analysis.first_pass_time) }} <br></br>
@@ -153,7 +159,8 @@ export default {
         first_submission_time: '',
         first_pass_time: '',
         last_submission_time: '',
-        total_work_time: ''
+        total_work_time: '',
+        highest_score: 0
       }
     }
   },
@@ -185,6 +192,7 @@ export default {
       })
       if (!this.isGuest) {
         getSubmissions({
+          problem_set_id: 0, // problem_set_id 时取全部
           problem_id: this.id,
           user_id: this.$store.state.user.info.id,
           limit: 5

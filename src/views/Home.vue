@@ -213,181 +213,181 @@ export default {
 <style lang="less" scoped>
 @import '~ant-design-vue/es/style/themes/default.less';
 
-  .text-overflow() {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    word-break: break-all;
+.text-overflow() {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
+
+// mixins for clearfix
+// ------------------------
+.clearfix() {
+  zoom: 1;
+  &::before,
+  &::after {
+    display: table;
+    content: ' ';
+  }
+  &::after {
+    clear: both;
+    height: 0;
+    font-size: 0;
+    visibility: hidden;
+  }
+}
+
+.page-header-content {
+  display: flex;
+
+  .avatar {
+    flex: 0 1 72px;
+
+    & > span {
+      display: block;
+      width: 72px;
+      height: 72px;
+      border-radius: 72px;
+    }
   }
 
-  // mixins for clearfix
-  // ------------------------
-  .clearfix() {
-    zoom: 1;
-    &::before,
-    &::after {
-      display: table;
-      content: ' ';
-    }
-    &::after {
-      clear: both;
-      height: 0;
-      font-size: 0;
-      visibility: hidden;
+  .content {
+    position: relative;
+    top: 4px;
+    flex: 1 1 auto;
+    margin-left: 24px;
+    color: @text-color-secondary;
+    line-height: 22px;
+
+    .content-title {
+      margin-bottom: 12px;
+      color: @heading-color;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 28px;
     }
   }
+}
 
-  .page-header-content {
-    display: flex;
+.extra-content {
+  .clearfix();
+  float: right;
+  white-space: nowrap;
 
-    .avatar {
-      flex: 0 1 72px;
+  .stat-item {
+    position: relative;
+    display: inline-block;
+    padding: 0 32px;
 
-      & > span {
-        display: block;
-        width: 72px;
-        height: 72px;
-        border-radius: 72px;
-      }
-    }
-
-    .content {
-      position: relative;
-      top: 4px;
-      flex: 1 1 auto;
-      margin-left: 24px;
+    > p:first-child {
+      margin-bottom: 4px;
       color: @text-color-secondary;
+      font-size: @font-size-base;
       line-height: 22px;
+    }
 
-      .content-title {
-        margin-bottom: 12px;
-        color: @heading-color;
-        font-weight: 500;
+    > p {
+      margin: 0;
+      color: @heading-color;
+      font-size: 30px;
+      line-height: 38px;
+
+      > span {
+        color: @text-color-secondary;
         font-size: 20px;
-        line-height: 28px;
       }
     }
-  }
 
-  .extra-content {
-    .clearfix();
-    float: right;
-    white-space: nowrap;
+    &::after {
+      position: absolute;
+      top: 8px;
+      right: 0;
+      width: 1px;
+      height: 40px;
+      background-color: @border-color-split;
+      content: '';
+    }
 
-    .stat-item {
-      position: relative;
-      display: inline-block;
-      padding: 0 32px;
-
-      > p:first-child {
-        margin-bottom: 4px;
-        color: @text-color-secondary;
-        font-size: @font-size-base;
-        line-height: 22px;
-      }
-
-      > p {
-        margin: 0;
-        color: @heading-color;
-        font-size: 30px;
-        line-height: 38px;
-
-        > span {
-          color: @text-color-secondary;
-          font-size: 20px;
-        }
-      }
+    &:last-child {
+      padding-right: 0;
 
       &::after {
-        position: absolute;
-        top: 8px;
-        right: 0;
-        width: 1px;
-        height: 40px;
-        background-color: @border-color-split;
-        content: '';
-      }
-
-      &:last-child {
-        padding-right: 0;
-
-        &::after {
-          display: none;
-        }
+        display: none;
       }
     }
   }
+}
 
-  .problem_set-list {
+.problem_set-list {
 
-    .card-title {
-      font-size: 0;
-
-      a {
-        color: rgba(0, 0, 0, 0.85);
-        margin-left: 12px;
-        line-height: 24px;
-        height: 24px;
-        display: inline-block;
-        vertical-align: top;
-        font-size: 14px;
-
-        &:hover {
-          color: #1890ff;
-        }
-      }
-    }
-
-    .card-description {
-      color: rgba(0, 0, 0, 0.45);
-      height: 44px;
-      line-height: 22px;
-      overflow: hidden;
-    }
-
-    .problem_set-item {
-      display: flex;
-      margin-top: 8px;
-      overflow: hidden;
-      font-size: 12px;
-      height: 20px;
-      line-height: 20px;
-
-      a {
-        color: rgba(0, 0, 0, 0.45);
-        display: inline-block;
-        flex: 1 1 0;
-
-        &:hover {
-          color: #1890ff;
-        }
-      }
-
-      .datetime {
-        color: rgba(0, 0, 0, 0.25);
-        flex: 0 0 auto;
-        float: right;
-      }
-    }
-
-    .ant-card-meta-description {
-      color: rgba(0, 0, 0, 0.45);
-      height: 44px;
-      line-height: 22px;
-      overflow: hidden;
-    }
-  }
-
-  .item-group {
-    padding: 20px 0 8px 24px;
+  .card-title {
     font-size: 0;
 
     a {
-      color: rgba(0, 0, 0, 0.65);
+      color: rgba(0, 0, 0, 0.85);
+      margin-left: 12px;
+      line-height: 24px;
+      height: 24px;
       display: inline-block;
+      vertical-align: top;
       font-size: 14px;
-      margin-bottom: 13px;
-      width: 25%;
+
+      &:hover {
+        color: #1890ff;
+      }
     }
   }
+
+  .card-description {
+    color: rgba(0, 0, 0, 0.45);
+    height: 44px;
+    line-height: 22px;
+    overflow: hidden;
+  }
+
+  .problem_set-item {
+    display: flex;
+    margin-top: 8px;
+    overflow: hidden;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+
+    a {
+      color: rgba(0, 0, 0, 0.45);
+      display: inline-block;
+      flex: 1 1 0;
+
+      &:hover {
+        color: #1890ff;
+      }
+    }
+
+    .datetime {
+      color: rgba(0, 0, 0, 0.25);
+      flex: 0 0 auto;
+      float: right;
+    }
+  }
+
+  .ant-card-meta-description {
+    color: rgba(0, 0, 0, 0.45);
+    height: 44px;
+    line-height: 22px;
+    overflow: hidden;
+  }
+}
+
+.item-group {
+  padding: 20px 0 8px 24px;
+  font-size: 0;
+
+  a {
+    color: rgba(0, 0, 0, 0.65);
+    display: inline-block;
+    font-size: 14px;
+    margin-bottom: 13px;
+    width: 25%;
+  }
+}
 </style>
