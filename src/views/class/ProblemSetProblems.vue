@@ -19,7 +19,7 @@
                   做题
                 </a-button>
               </router-link>
-              <router-link :to="{name: 'class.problemSet.analysis', params: {problemSetID: id,problemID: problem.id}}">
+              <router-link :to="{name: 'class.problemSet.analysis',params: {problemSetID:id,problemID:problem.id}}">
                 <a-button type='link'>
                   查看分数
                 </a-button>
@@ -28,7 +28,7 @@
           </a-list-item>
         </a-list>
         <router-link
-          :to="{name: 'class.problemSet.submissions', params: {classID: classID, problemSetID: problem_set.id}}"
+          :to="{name: 'class.problemSet.submissions'}"
         >
           <a-button
             style="margin-top: 10px"
@@ -47,7 +47,6 @@ import Avatar from '@/components/Avatar'
 import { mapGetters } from 'vuex'
 import { getProblemSet } from '@/api/class'
 import moment from 'moment'
-// import { getProblemSetSpecificProblemAnalysis } from '@/api/analysis'
 
 export default {
   methods: {
@@ -61,17 +60,6 @@ export default {
           content: '获取作业详情时发生了错误' + err.message
         })
       })
-      // getProblemSetSpecificProblemAnalysis({
-      //   problem_set_id: this.id,
-      //   problem_id: this.$route.params.problemID
-      // }).then(data => {
-      //   this.ProblemSetSpecificProblemAnalysisResponse = data.ProblemSetSpecificProblemAnalysisResponse
-      // }).catch(err => {
-      //   this.$error({
-      //     content: '遇到错误' + err.message
-      //   })
-      //   console.error(err)
-      // })
     }
   },
   components: {

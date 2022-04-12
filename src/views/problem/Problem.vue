@@ -105,7 +105,7 @@
 <script>
 import { getProblem } from '@/api/problem'
 import { getSubmissions } from '@/api/submission'
-import { getSubmissionsBasicAnalysis } from '@/api/analysis'
+import { getProblemSetProblemUserAnalysis } from '@/api/analysis'
 import Markdown from '@/components/Editor/Markdown'
 import RunStatus from '@/components/RunStatus'
 import TestCase from '@/components/TestCase'
@@ -207,17 +207,16 @@ export default {
         })
       }
       if (!this.isGuest) {
-        getSubmissionsBasicAnalysis({
-          user_id: this.$store.state.user.info.id,
-          problem_id: this.id
-        }).then(data => {
-          this.analysis = data.analysis
-        }).catch(err => {
-          this.$error({
-            content: '遇到错误：' + err.message
+        getProblemSetProblemUserAnalysis(0, this.$route.params.id, this.$store.state.user.info.id)
+          .then(data => {
+            this.analysis = data.analysis
           })
-          console.error(err)
-        })
+          .catch(err => {
+            this.$error({
+              content: '遇到错误：' + err.message
+            })
+            console.error(err)
+          })
       }
     },
     downloadAttachment () {

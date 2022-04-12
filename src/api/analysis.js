@@ -1,22 +1,20 @@
 import api from '@/api/api'
 
 const analysisApi = {
-  GetSubmissionsBasicAnalysis: '/api/analysis/basic',
-  GetProblemSetSpecificProblemAnalysis: '/api/analysis/ProblemSetSpecificProblem'
+  GetProblemSetProblemUserAnalysis: '/api//analysis/problem-set/:problem_set_id/problem/:problem_id/user/:user_id',
+  GetProblemSetProblemAnalysis: '/api//analysis/problem-set/:problem_set_id/problem/:problem_id'
 }
 
-export function getSubmissionsBasicAnalysis(req) {
+export function getProblemSetProblemUserAnalysis(problemSetId, problemId, userId) {
   return api({
-    url: analysisApi.GetSubmissionsBasicAnalysis,
-    method: 'get',
-    params: req
+    url: analysisApi.GetProblemSetProblemUserAnalysis.replace(':problem_set_id', problemSetId).replace(':problem_id', problemId).replace(':user_id', userId),
+    method: 'get'
   })
 }
 
-export function getProblemSetSpecificProblemAnalysis(req) {
+export function getProblemSetProblemAnalysis(problemSetId, problemId) {
   return api({
-    url: analysisApi.GetProblemSetSpecificProblemAnalysis,
-    method: 'get',
-    params: req
+    url: analysisApi.GetProblemSetProblemAnalysis.replace(':problem_set_id', problemSetId).replace(':problem_id', problemId),
+    method: 'get'
   })
 }
