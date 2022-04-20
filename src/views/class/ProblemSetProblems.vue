@@ -11,16 +11,16 @@
             <div class="problem-name">
               {{ problem.name }}
             </div>
-            <div class='toolbar-row'>
-              <div class='space'></div>
+            <div class="toolbar-row">
+              <div class="space"></div>
               <router-link
                 :to="{name: 'class.problemSet.problem', params: {id, classID: classID, problemID: problem.id}}">
-                <a-button type='link'>
+                <a-button type="link">
                   做题
                 </a-button>
               </router-link>
               <router-link :to="{name: 'class.problemSet.analysis',params: {problemSetID:id,problemID:problem.id}}">
-                <a-button type='link'>
+                <a-button type="link">
                   查看分数
                 </a-button>
               </router-link>
@@ -95,22 +95,28 @@ export default {
   font-size: 18px
   font-weight: bold
   width: 100%
+
 .ant-list-item-meta
   align-items: center
   width: 100%
+
 .ant-space-horizontal
   width: 100%
   justify-content: center
+
 .ant-list-item
   flex-wrap: wrap
+
 .tool-card
   ::v-deep
     .toolbar-row
       display: flex
       justify-content: center
       width: 100%
+
       :not(:last-child)
         margin-right: 10px
+
       .space
         flex: 1
 </style>

@@ -33,7 +33,9 @@ const vueConfig = {
       })
     ],
     // if prod, add externals
-    externals: isProd ? assetsCDN.externals : {}
+    externals: isProd ? assetsCDN.externals : {},
+    // 调试：在浏览器中展示源代码
+    devtool: 'source-map'
   },
 
   chainWebpack: (config) => {

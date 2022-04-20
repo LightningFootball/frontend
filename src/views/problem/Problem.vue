@@ -6,16 +6,22 @@
           <a-skeleton active :loading="problem_loading">
             <markdown v-model="problem.description">
             </markdown>
-            <test-case v-for="t in problem.test_cases" :t="t" :key="t.id" :can-read-secret="can_read_secret" v-if="!isGuest"/>
+            <test-case
+              v-for="t in problem.test_cases"
+              :t="t"
+              :key="t.id"
+              :can-read-secret="can_read_secret"
+              v-if="!isGuest"/>
           </a-skeleton>
           <router-link :to="{name: 'problem.edit', params: {id :problem.id}}" slot="extra" v-if="can_edit_problem">
             <a-button>
-              <a-icon type="edit"/> 编辑题目
+              <a-icon type="edit"/>
+              编辑题目
             </a-button>
           </router-link>
         </a-card>
       </a-col>
-      <a-col :xl="{span:6}" :lg="{span:8}" >
+      <a-col :xl="{span:6}" :lg="{span:8}">
         <a-space direction="vertical">
           <a-card>
             <a-descriptions title="题目信息" :column="3">
@@ -23,7 +29,9 @@
                 {{ problem.time_limit }} ms
               </a-descriptions-item>
               <a-descriptions-item label="内存限制">
-                {{ problem.memory_limit > 1024 * 1024 ? problem.memory_limit / (1024 * 1024) + " MiB" : problem.memory_limit / 1024 + (" Kib") }}
+                {{
+                  problem.memory_limit > 1024 * 1024 ? problem.memory_limit / (1024 * 1024) + " MiB" : problem.memory_limit / 1024 + (" Kib")
+                }}
               </a-descriptions-item>
               <a-descriptions-item label="是否公开" v-if="can_read_problem">
                 {{ problem.public ? "是" : "否" }}
@@ -39,16 +47,22 @@
                 </Language>
               </a-descriptions-item>
               <a-descriptions-item label="答案比较方式" :span="3">
-                {{ comparerConf[problem.compare_script_name].name == null ? problem.compare_script_name : comparerConf[problem.compare_script_name].name }}
+                {{
+                  comparerConf[problem.compare_script_name].name == null ? problem.compare_script_name : comparerConf[problem.compare_script_name].name
+                }}
               </a-descriptions-item>
               <a-descriptions-item label="编译选项" :span="3" v-if="can_read_problem">
-                {{ problem.build_arg === "" ? "无" :problem.build_arg }}
+                {{ problem.build_arg === "" ? "无" : problem.build_arg }}
               </a-descriptions-item>
               <a-descriptions-item label="附件" :span="3">
                 {{ problem.attachment_file_name === "" ? "无" : "" }}
-                <a-button :loading="downloading" @click="downloadAttachment()" v-if="problem.attachment_file_name !== ''">
-                  <a-icon type="download" />
-                  {{ download_message }}</a-button>
+                <a-button
+                  :loading="downloading"
+                  @click="downloadAttachment()"
+                  v-if="problem.attachment_file_name !== ''">
+                  <a-icon type="download"/>
+                  {{ download_message }}
+                </a-button>
               </a-descriptions-item>
             </a-descriptions>
             <router-link :to="{name: 'problem.submit', params: {id: problem.id}}">
@@ -77,20 +91,20 @@
               </a-list-item>
             </a-list>
           </a-card>
-          <a-card class='analysis_card' v-if='!isGuest'>
-            <template slot='title'>分析</template>
-            <template v-if='analysis.highest_score===100'>
-              <h3 style='text-align: center'> 恭喜你，该题目您已成功通过至少一次啦！</h3>
+          <a-card class="analysis_card" v-if="!isGuest">
+            <template slot="title">分析</template>
+            <template v-if="analysis.highest_score===100">
+              <h3 style="text-align: center"> 恭喜你，该题目您已成功通过至少一次啦！</h3>
             </template>
             <template v-else>
-              <h3 style='text-align: center'> 该题目您还未通过，请继续努力！</h3>
+              <h3 style="text-align: center"> 该题目您还未通过，请继续努力！</h3>
             </template>
-            <template v-if='analysis.total_submission_count!==0'>
-              <h3>总提交次数</h3> {{ analysis.total_submission_count }} <br></br>
-              <h3>首次提交时间</h3> {{ format(analysis.first_submission_time) }} <br></br>
-              <h3>首次通过时间</h3> {{ format(analysis.first_pass_time) }} <br></br>
-              <h3>最后提交时间</h3> {{ format(analysis.last_submission_time) }} <br></br>
-              <h3>总工作时长</h3> {{ formatTimeDuration(analysis.total_work_time) }} <br></br>
+            <template v-if="analysis.total_submission_count!==0">
+              <h3>总提交次数</h3> {{ analysis.total_submission_count }}
+              <h3>首次提交时间</h3> {{ format(analysis.first_submission_time) }}
+              <h3>首次通过时间</h3> {{ format(analysis.first_pass_time) }}
+              <h3>最后提交时间</h3> {{ format(analysis.last_submission_time) }}
+              <h3>总工作时长</h3> {{ formatTimeDuration(analysis.total_work_time) }}
             </template>
             <template v-else>
               <h3>暂无提交记录，快去创建第一次提交吧~</h3>
@@ -179,7 +193,9 @@ export default {
       getProblem(this.id).then(data => {
         this.problem_loading = false
         data.problem.test_cases.sort((a, b) => {
-          if (a.sample === b.sample) { return a.id - b.id }
+          if (a.sample === b.sample) {
+            return a.id - b.id
+          }
           return !a.sample ? 1 : -1 // make sample testcase top.
         })
         this.problem = data.problem
@@ -258,10 +274,13 @@ export default {
 .submission_card
   .ant-card-body
     padding: 0
+
   .ant-list
     border: 0
+
 .problem_spin
   height: 100%
+
   .ant-spin-container
     height: 100%
 </style>
